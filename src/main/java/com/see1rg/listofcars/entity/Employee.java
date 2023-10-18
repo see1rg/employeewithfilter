@@ -47,7 +47,7 @@ public class Employee {
     @Column(name = "creation_date")
     private Timestamp creationDate;
 
-    @Column(name = "dept_id")
+    @JoinColumn(name = "dept_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Department departmentId;
 

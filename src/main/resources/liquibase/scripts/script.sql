@@ -4,7 +4,7 @@
 
 -- Таблица "Пользователи"
 create table if not exists users (
-                       user_id int primary key,
+                       user_id serial primary key,
                        full_name varchar(255),
                        username varchar(50) UNIQUE,
                        password varchar(255)
@@ -12,7 +12,7 @@ create table if not exists users (
 
 -- Таблица "Departments"
 create table if not exists departments (
-                                           id int primary key,
+                                           id serial primary key,
                                            name varchar(55) not null,
                                            description text,
                                            creation_date timestamp not null default current_timestamp
@@ -20,7 +20,7 @@ create table if not exists departments (
 
 -- Таблица "Сотрудники"
 create table if not exists employees (
-                                         id int primary key,
+                                         id serial primary key,
                                          full_name varchar(255),
                                          description text,
                                          experience int,

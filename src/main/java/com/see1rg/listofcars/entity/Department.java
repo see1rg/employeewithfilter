@@ -28,8 +28,8 @@ public class Department {
     @Column(name = "creation_date")
     private Timestamp creationDate;
 
-    @Column(name = "cars_id")
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "cars")
+    @Column(name = "employee_id")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "departmentId")
     private List<Employee> employee;
 
 }

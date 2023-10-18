@@ -2,36 +2,34 @@
 
 -- changeSet see1rg:1
 
-CREATE TABLE users (
-                       user_id INT PRIMARY KEY,
-                       full_name VARCHAR(255),
-                       username VARCHAR(50) UNIQUE,
-                       password VARCHAR(255)
+-- Таблица "Пользователи"
+create table if not exists users (
+                       user_id int primary key,
+                       full_name varchar(255),
+                       username varchar(50) UNIQUE,
+                       password varchar(255)
 );
 
-CREATE TABLE cars (
-                      id INT PRIMARY KEY,
-                      name VARCHAR(255),
-                      body_type VARCHAR(15),
-                      year INT,
-                      price DECIMAL(10, 2),
-                      date DATE,
-                      date_time TIMESTAMP,
-                      car_description_id INT,
-                      image BYTEA,
-                      data BYTEA,
-                      parent_id INT,
-                      FOREIGN KEY (parent_id) REFERENCES cars(id)
+-- Таблица "Departments"
+create table if not exists departments (
+                                           id int primary key,
+                                           name varchar(55) not null,
+                                           description text,
+                                           creation_date timestamp not null default current_timestamp
 );
 
-CREATE TABLE car_description (
-                                 id INT PRIMARY KEY,
-                                 name VARCHAR(255),
-                                 brand VARCHAR(50),
-                                 model VARCHAR(50),
-                                 year INT,
-                                 engine_type VARCHAR(50),
-                                 horse_power INT,
-                                 cars_id INT,
-                                 FOREIGN KEY (cars_id) REFERENCES cars(id)
+-- Таблица "Сотрудники"
+create table if not exists employees (
+                                         id int primary key,
+                                         full_name varchar(255),
+                                         description text,
+                                         experience int,
+                                         salary numeric(10, 2),
+                                         birth_date date,
+                                         manager bigint, --parent
+                                         creation_date timestamp not null default current_timestamp,
+                                         dept_id bigint,
+                                         image bytea,
+                                         blob bytea,
+                                         constraint employees_departments_fk foreign key (dept_id) references departments (id) on update cascade on delete cascade
 );

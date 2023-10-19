@@ -5,20 +5,25 @@ import com.see1rg.listofcars.model.EmployeeSearchCriteria;
 import com.see1rg.listofcars.model.entity.Employee;
 import com.see1rg.listofcars.model.entity.dto.EmployeeDTO;
 import com.see1rg.listofcars.service.EmployeeService;
+import com.see1rg.listofcars.service.EntityService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotEmpty;
+
 @RestController
 @RequestMapping("/api")
 public class EmployeeController {
 
     private final EmployeeService employeeService;
+    private final EntityService entityService;
 
-    public EmployeeController(EmployeeService employeeService) {
+    public EmployeeController(EmployeeService employeeService, EntityService entityService) {
         this.employeeService = employeeService;
+        this.entityService = entityService;
     }
 
 
@@ -47,8 +52,9 @@ public class EmployeeController {
 
     @DeleteMapping("/delete_data")
     @PreAuthorize("hasRole('ROLE_DELETE')")
-    public ResponseEntity<String> deleteEmployee(@RequestParam Long id) {
+    public ResponseEntity<String> deleteEmployee(@NotEmpty @RequestParam String entityType, @NotEmpty @RequestParam Integer entityId) {
 
-        return null;
+        entityService.deleteEntity(entityType, entityId);
+        return ResponseEntity.ok("Entity deleted successfully");
     }
 }

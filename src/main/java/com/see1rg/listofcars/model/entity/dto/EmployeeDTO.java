@@ -1,7 +1,5 @@
 package com.see1rg.listofcars.model.entity.dto;
 
-import com.see1rg.listofcars.model.entity.Department;
-
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -15,7 +13,7 @@ public class EmployeeDTO {
     private Date birthDate;
     private Integer managerId;
     private Timestamp creationDate;
-    private Department departmentId;
+    private Integer departmentId;
 
     public Integer getId() {
         return id;
@@ -81,11 +79,11 @@ public class EmployeeDTO {
         this.creationDate = creationDate;
     }
 
-    public Department getDepartmentId() {
+    public Integer getDepartmentId() {
         return departmentId;
     }
 
-    public void setDepartmentId(Department departmentId) {
+    public void setDepartmentId(Integer departmentId) {
         this.departmentId = departmentId;
     }
 }

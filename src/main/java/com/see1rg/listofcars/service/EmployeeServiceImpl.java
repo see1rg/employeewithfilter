@@ -3,6 +3,7 @@ package com.see1rg.listofcars.service;
 import com.see1rg.listofcars.model.EmployeePage;
 import com.see1rg.listofcars.model.EmployeeSearchCriteria;
 import com.see1rg.listofcars.model.entity.Employee;
+import com.see1rg.listofcars.model.entity.dto.EmployeeDTO;
 import com.see1rg.listofcars.repository.EmployeeCriteriaRepository;
 import com.see1rg.listofcars.repository.EmployeeRepository;
 import org.slf4j.Logger;
@@ -25,7 +26,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         this.employeeCriteriaRepository = employeeCriteriaRepository;
     }
 
-    public Page<Employee> findAllWithFilters(EmployeePage employeePage, EmployeeSearchCriteria employeeSearchCriteria) {
+    public Page<EmployeeDTO> findAllWithFilters(EmployeePage employeePage, EmployeeSearchCriteria employeeSearchCriteria) {
         log.info("findAllWithFilters");
         return employeeCriteriaRepository.findAllWithFilters(employeePage, employeeSearchCriteria);
     }

@@ -1,6 +1,7 @@
 package com.see1rg.listofcars.model.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
@@ -45,9 +46,9 @@ public class Employee {
     @Column(name = "creation_date")
     private Timestamp creationDate;
 
-    @JoinColumn(name = "dept_id")
+    @JoinColumn(name = "dept_id", referencedColumnName = "id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore //todo
+    @JsonBackReference
     private Department departmentId;
 
     @Lob

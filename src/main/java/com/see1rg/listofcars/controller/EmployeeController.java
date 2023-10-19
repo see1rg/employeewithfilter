@@ -3,6 +3,7 @@ package com.see1rg.listofcars.controller;
 import com.see1rg.listofcars.model.EmployeePage;
 import com.see1rg.listofcars.model.EmployeeSearchCriteria;
 import com.see1rg.listofcars.model.entity.Employee;
+import com.see1rg.listofcars.model.entity.dto.EmployeeDTO;
 import com.see1rg.listofcars.service.EmployeeService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -23,15 +24,15 @@ public class EmployeeController {
 
     @GetMapping("/data_list")
     @PreAuthorize("hasRole('ROLE_LIST_VIEW')")
-    public ResponseEntity<Page<Employee>> getEmployeeList(EmployeePage employeePage,
-                                                          EmployeeSearchCriteria employeeSearchCriteria) {
+    public ResponseEntity<Page<EmployeeDTO>> getEmployeeList(EmployeePage employeePage,
+                                                             EmployeeSearchCriteria employeeSearchCriteria) {
 
         return new ResponseEntity<>(employeeService.findAllWithFilters(employeePage, employeeSearchCriteria),
                 HttpStatus.OK);
     }
 
     @GetMapping("/get_data")
-    @PreAuthorize("hasRole('ROLE_EDIT')")
+    @PreAuthorize("hasRole('ROLE_ADD')")
     public ResponseEntity<Employee> getEmployeeForEdit(@RequestParam Long id) {
 
         return null;

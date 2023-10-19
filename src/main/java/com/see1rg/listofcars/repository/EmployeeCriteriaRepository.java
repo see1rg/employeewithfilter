@@ -1,8 +1,10 @@
 package com.see1rg.listofcars.repository;
 
+import com.see1rg.listofcars.mapper.EmployeeMapper;
 import com.see1rg.listofcars.model.EmployeePage;
 import com.see1rg.listofcars.model.EmployeeSearchCriteria;
 import com.see1rg.listofcars.model.entity.Employee;
+import com.see1rg.listofcars.model.entity.dto.EmployeeDTO;
 import org.springframework.data.domain.*;
 import org.springframework.stereotype.Repository;
 
@@ -21,13 +23,16 @@ public class EmployeeCriteriaRepository {
     private final EntityManager entityManager;
     private final CriteriaBuilder criteriaBuilder;
 
-    public EmployeeCriteriaRepository(EntityManager entityManager) {
+    private final EmployeeMapper employeeMapper;
+
+    public EmployeeCriteriaRepository(EntityManager entityManager, EmployeeMapper employeeMapper) {
         this.entityManager = entityManager;
         this.criteriaBuilder = entityManager.getCriteriaBuilder();
+        this.employeeMapper = employeeMapper;
     }
 
-    public Page<Employee> findAllWithFilters(EmployeePage employeePage,
-                                             EmployeeSearchCriteria employeeSearchCriteria) {
+    public Page<EmployeeDTO> findAllWithFilters(EmployeePage employeePage,
+                                                EmployeeSearchCriteria employeeSearchCriteria) {
 
         CriteriaQuery<Employee> criteriaQuery = criteriaBuilder.createQuery(Employee.class);
         Root<Employee> employeeRoot = criteriaQuery.from(Employee.class);
@@ -41,7 +46,9 @@ public class EmployeeCriteriaRepository {
         typedQuery.setFirstResult(employeePage.getPageNumber() * employeePage.getPageSize());
         typedQuery.setMaxResults(employeePage.getPageSize());
 
-        List<Employee> employees = typedQuery.getResultList();
+        List<EmployeeDTO> employees = typedQuery.getResultList().stream()
+                .map(employeeMapper::toEmployeeDTO).toList();
+
 
         Pageable pageable = getPageable(employeePage);
 

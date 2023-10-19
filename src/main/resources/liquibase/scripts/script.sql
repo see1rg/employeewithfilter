@@ -4,10 +4,12 @@
 
 -- Таблица "Пользователи"
 create table if not exists users (
-                       user_id serial primary key,
+                       id serial primary key,
                        full_name varchar(255),
                        username varchar(50) UNIQUE,
-                       password varchar(255)
+                       email varchar(50) UNIQUE,
+                       password varchar(255),
+                       role varchar(12)
 );
 
 -- Таблица "Departments"
@@ -25,11 +27,11 @@ create table if not exists employees (
                                          description text,
                                          experience int,
                                          salary numeric(10, 2),
-                                         birth_date date,
+                                         birth_date timestamp,
                                          manager bigint, --parent
                                          creation_date timestamp not null default current_timestamp,
-                                         dept_id bigint,
+                                         dept_id int,
                                          image bytea,
-                                         blob bytea,
+                                         data bytea,
                                          constraint employees_departments_fk foreign key (dept_id) references departments (id) on update cascade on delete cascade
 );

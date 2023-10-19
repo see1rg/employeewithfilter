@@ -1,5 +1,5 @@
 -- Создание 50 сотрудников
-INSERT INTO employees (id, full_name, description, experience, salary, birth_date, manager, dept_id, image, blob)
+INSERT INTO employees (id, full_name, description, experience, salary, birth_date, manager, dept_id, image, data)
 VALUES
     (1, 'Иванов Иван Иванович', 'Описание Иванова', 10, 60000.00, '1980-01-15', 101, 8, E'\\x0123456789ABCDEF', E'\\x0123456789ABCDEF'),
     (2, 'Петров Петр Петрович', 'Описание Петрова', 8, 55000.00, '1982-03-20', 102, 2, E'\\x0123456789ABCDEF', E'\\x0123456789ABCDEF'),

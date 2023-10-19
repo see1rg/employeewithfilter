@@ -1,23 +1,13 @@
-package com.see1rg.listofcars.entity;
+package com.see1rg.listofcars.entity.dto;
 
-import javax.persistence.*;
+import com.see1rg.listofcars.entity.Role;
+
 import java.util.Objects;
 
-@Entity
-@Table(name = "users")
-public class User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class SecurityUserDto {
     private Integer id;
-    @Column(nullable = false)
-    private String fullName;
-    @Column(nullable = false, unique = true)
-    private String username;
-    @Column(unique = true)
     private String email;
-    @Column(nullable = false)
     private String password;
-    @Enumerated(EnumType.STRING)
     private Role role;
 
     public Integer getId() {
@@ -26,22 +16,6 @@ public class User {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getEmail() {
@@ -72,12 +46,13 @@ public class User {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
+        SecurityUserDto that = (SecurityUserDto) o;
+        return Objects.equals(id, that.id) && Objects.equals(email, that.email) && Objects.equals(password, that.password) && role == that.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, email, password, role);
     }
 }
+

@@ -1,4 +1,4 @@
-package com.see1rg.listofcars.entity.dto;
+package com.see1rg.listofcars.model.entity.dto;
 
 import java.util.Objects;
 

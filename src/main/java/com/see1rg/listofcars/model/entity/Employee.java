@@ -1,5 +1,7 @@
-package com.see1rg.listofcars.entity;
+package com.see1rg.listofcars.model.entity;
 
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -7,6 +9,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 
@@ -37,38 +40,28 @@ public class Employee {
 
     @Column(name = "manager") //parent
     @Digits(integer = 10, fraction = 0, message = "Parent ID must be a numeric value")
-    private Long managerId;
+    private Integer managerId;
 
     @Column(name = "creation_date")
     private Timestamp creationDate;
 
     @JoinColumn(name = "dept_id")
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore //todo
     private Department departmentId;
 
     @Lob
     @Column(name = "image", columnDefinition = "bytea")
-    private byte[] image;
+    @Transient
+    private byte[] image; //todo
 
     @Lob
     @Column(name = "data", columnDefinition = "bytea")
-    private byte[] data;
-
-    public Employee(Integer id, String fullName, String description, Integer experience, BigDecimal salary, Date birthDate, Long managerId, Timestamp creationDate, Department departmentId, byte[] image, byte[] data) {
-        this.id = id;
-        this.fullName = fullName;
-        this.description = description;
-        this.experience = experience;
-        this.salary = salary;
-        this.birthDate = birthDate;
-        this.managerId = managerId;
-        this.creationDate = creationDate;
-        this.departmentId = departmentId;
-        this.image = image;
-        this.data = data;
-    }
+    @Transient
+    private byte[] data; //todo
 
     public Employee() {
+
     }
 
     public Integer getId() {
@@ -119,11 +112,11 @@ public class Employee {
         this.birthDate = birthDate;
     }
 
-    public Long getManagerId() {
+    public Integer getManagerId() {
         return managerId;
     }
 
-    public void setManagerId(Long managerId) {
+    public void setManagerId(Integer managerId) {
         this.managerId = managerId;
     }
 
@@ -170,5 +163,22 @@ public class Employee {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", fullName='" + fullName + '\'' +
+                ", description='" + description + '\'' +
+                ", experience=" + experience +
+                ", salary=" + salary +
+                ", birthDate=" + birthDate +
+                ", managerId=" + managerId +
+                ", creationDate=" + creationDate +
+                ", departmentId=" + departmentId +
+                ", image=" + Arrays.toString(image) +
+                ", data=" + Arrays.toString(data) +
+                '}';
     }
 }

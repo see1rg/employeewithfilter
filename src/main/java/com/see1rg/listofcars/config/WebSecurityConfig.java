@@ -18,10 +18,10 @@ import static org.springframework.security.config.Customizer.withDefaults;
 public class WebSecurityConfig {
 
     private static final String[] AUTH_WHITELIST = {
-            "/webjars/**",
-            "/auth/**",
-            "/users/*/image"
-    };
+            "/swagger-resources/**",
+            "/swagger-ui/**",
+            "/v3/api-docs",
+            "/auth/**"};
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {

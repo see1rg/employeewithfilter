@@ -1,10 +1,10 @@
-package com.see1rg.listofcars.entity.dto;
+package com.see1rg.listofcars.model.entity.dto;
 
 import java.util.Objects;
 
 public class LoginReq {
-    private String password;
     private String username;
+    private String password;
 
     public String getPassword() {
         return password;

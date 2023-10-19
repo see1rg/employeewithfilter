@@ -1,6 +1,6 @@
 package com.see1rg.listofcars.securities;
 
-import com.see1rg.listofcars.entity.dto.SecurityUserDto;
+import com.see1rg.listofcars.model.entity.dto.SecurityUserDto;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @Component
 public class MyUserDetails implements UserDetails {
-
     private transient SecurityUserDto user;
 
     public void setUserDto(SecurityUserDto userDto) {
@@ -21,6 +20,7 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+
         return Optional.ofNullable(user)
                 .map(SecurityUserDto::getRole)
                 .map(role -> "ROLE_" + role)
@@ -39,7 +39,7 @@ public class MyUserDetails implements UserDetails {
     @Override
     public String getUsername() {
         return Optional.ofNullable(user)
-                .map(SecurityUserDto::getEmail)
+                .map(SecurityUserDto::getUsername)
                 .orElse(null);
     }
 

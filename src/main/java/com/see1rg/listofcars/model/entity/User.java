@@ -1,4 +1,4 @@
-package com.see1rg.listofcars.entity;
+package com.see1rg.listofcars.model.entity;
 
 import javax.persistence.*;
 import java.util.Objects;

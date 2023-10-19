@@ -1,9 +1,9 @@
 package com.see1rg.listofcars.mapper;
 
-import com.see1rg.listofcars.entity.User;
-import com.see1rg.listofcars.entity.dto.RegisterReq;
-import com.see1rg.listofcars.entity.dto.SecurityUserDto;
-import com.see1rg.listofcars.entity.dto.UserDto;
+import com.see1rg.listofcars.model.entity.User;
+import com.see1rg.listofcars.model.entity.dto.RegisterReq;
+import com.see1rg.listofcars.model.entity.dto.SecurityUserDto;
+import com.see1rg.listofcars.model.entity.dto.UserDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;

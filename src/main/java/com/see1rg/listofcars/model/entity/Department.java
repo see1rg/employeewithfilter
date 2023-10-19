@@ -1,4 +1,4 @@
-package com.see1rg.listofcars.entity;
+package com.see1rg.listofcars.model.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -26,6 +26,20 @@ public class Department {
     @Column(name = "employee_id")
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "departmentId")
     private List<Employee> employee;
+
+    public Department(Integer id, String name,
+                      String description, Timestamp creationDate,
+                      List<Employee> employee) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.creationDate = creationDate;
+        this.employee = employee;
+    }
+
+    public Department() {
+
+    }
 
     public Integer getId() {
         return id;

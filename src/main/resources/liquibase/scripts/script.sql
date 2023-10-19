@@ -28,7 +28,7 @@ create table if not exists employees (
                                          experience int,
                                          salary numeric(10, 2),
                                          birth_date timestamp,
-                                         manager bigint, --parent
+                                         manager int, --parent
                                          creation_date timestamp not null default current_timestamp,
                                          dept_id int,
                                          image bytea,

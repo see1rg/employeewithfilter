@@ -1,6 +1,6 @@
 package com.see1rg.listofcars.securities;
 
-import com.see1rg.listofcars.entity.dto.SecurityUserDto;
+import com.see1rg.listofcars.model.entity.dto.SecurityUserDto;
 import com.see1rg.listofcars.mapper.UserMapper;
 import com.see1rg.listofcars.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,7 +23,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        SecurityUserDto securityUserDto = userRepository.findByEmailIgnoreCase(username)
+        SecurityUserDto securityUserDto = userRepository.findByUsernameIgnoreCase(username)
                 .map(userMapper::toSecurityDto)
                 .orElseThrow(() -> new UsernameNotFoundException("User %s not found".formatted(username)));
         userDetails.setUserDto(securityUserDto);

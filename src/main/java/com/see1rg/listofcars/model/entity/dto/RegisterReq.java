@@ -1,6 +1,6 @@
-package com.see1rg.listofcars.entity.dto;
+package com.see1rg.listofcars.model.entity.dto;
 
-import com.see1rg.listofcars.entity.Role;
+import com.see1rg.listofcars.model.entity.Role;
 
 import java.util.Objects;
 

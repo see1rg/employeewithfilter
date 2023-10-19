@@ -1,8 +1,8 @@
 package com.see1rg.listofcars.service;
 
 
-import com.see1rg.listofcars.entity.dto.RegisterReq;
-import com.see1rg.listofcars.entity.dto.UserDto;
+import com.see1rg.listofcars.model.entity.dto.RegisterReq;
+import com.see1rg.listofcars.model.entity.dto.UserDto;
 
 import java.security.Principal;
 import java.util.Optional;

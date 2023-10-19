@@ -1,8 +1,8 @@
 package com.see1rg.listofcars.service;
 
-import com.see1rg.listofcars.entity.User;
-import com.see1rg.listofcars.entity.dto.RegisterReq;
-import com.see1rg.listofcars.entity.dto.UserDto;
+import com.see1rg.listofcars.model.entity.User;
+import com.see1rg.listofcars.model.entity.dto.RegisterReq;
+import com.see1rg.listofcars.model.entity.dto.UserDto;
 import com.see1rg.listofcars.exception.UserNotFoundException;
 import com.see1rg.listofcars.mapper.UserMapper;
 import com.see1rg.listofcars.repository.UserRepository;
@@ -39,14 +39,17 @@ public class UserServiceImpl implements UserService {
     public RegisterReq update(RegisterReq user, Principal principal) {
         log.info("Update user: {}", principal);
         User optionalUser = userRepository.findUserByUsername(principal.getName());
+
         if (optionalUser == null) {
             throw new UserNotFoundException();
         }
+
         User updateUser = userMapper.updateUserFromRegisterReq(user, optionalUser);
         updateUser.setRole(optionalUser.getRole());
         updateUser.setId(optionalUser.getId());
         updateUser.setEmail(optionalUser.getEmail());
         userRepository.save(updateUser);
+
         return user;
     }
 

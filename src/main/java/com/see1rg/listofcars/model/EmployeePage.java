@@ -1,27 +1,27 @@
-package com.see1rg.listofcars.entity;
+package com.see1rg.listofcars.model;
 
 import org.springframework.data.domain.Sort;
 
 public class EmployeePage {
-    private int page = 0;
-    private int size = 10;
+    private int pageNumber = 0;
+    private int pageSize = 10;
     private Sort.Direction sortDirection = Sort.Direction.ASC;
-    private String sortBy = "id";
+    private String sortBy = "fullName";
 
-    public int getPage() {
-        return page;
+    public int getPageNumber() {
+        return pageNumber;
     }
 
-    public void setPage(int page) {
-        this.page = page;
+    public void setPageNumber(int pageNumber) {
+        this.pageNumber = pageNumber;
     }
 
-    public int getSize() {
-        return size;
+    public int getPageSize() {
+        return pageSize;
     }
 
-    public void setSize(int size) {
-        this.size = size;
+    public void setPageSize(int pageSize) {
+        this.pageSize = pageSize;
     }
 
     public Sort.Direction getSortDirection() {

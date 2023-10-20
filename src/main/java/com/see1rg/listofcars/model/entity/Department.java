@@ -1,5 +1,8 @@
 package com.see1rg.listofcars.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import java.sql.Timestamp;
@@ -21,11 +24,13 @@ public class Department {
     private String description;
 
     @Column(name = "creation_date")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Timestamp creationDate;
 
 
     @Column(name = "employee_id")
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "departmentId")
+    @JsonIgnore
     private List<Employee> employee;
 
     public Department(Integer id, String name,

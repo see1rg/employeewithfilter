@@ -3,12 +3,13 @@ package com.see1rg.listofcars.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -27,6 +28,7 @@ public class Employee {
 
     @Column(name = "full_name")
     @NotEmpty
+    @Pattern(regexp = "^[a-zA-Z]+$", message = "Поле должно содержать только буквы")
     private String fullName;
 
     @Column(name = "description")
@@ -49,11 +51,11 @@ public class Employee {
 
     @Column(name = "creation_date")
     @JsonIgnore
+    @Generated(GenerationTime.ALWAYS)
     private Timestamp dateOfLastModification;
 
     @JoinColumn(name = "dept_id", referencedColumnName = "id")
     @ManyToOne(fetch = FetchType.LAZY)
-    @Cascade({CascadeType.PERSIST})
     private Department departmentId;
 
     @Lob

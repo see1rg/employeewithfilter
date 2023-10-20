@@ -1,6 +1,7 @@
 package com.see1rg.listofcars.model.entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Objects;
 
 @Entity
@@ -11,11 +12,12 @@ public class User {
     private Integer id;
     @Column(nullable = false)
     private String fullName;
-    @Column(nullable = false, unique = true)
+    @Column(unique = true)
+    @NotEmpty
     private String username;
     @Column(unique = true)
     private String email;
-    @Column(nullable = false)
+    @NotEmpty
     private String password;
     @Enumerated(EnumType.STRING)
     private Role role;

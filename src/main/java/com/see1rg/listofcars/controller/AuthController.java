@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotBlank;
+
 import static org.slf4j.LoggerFactory.getLogger;
 
 //@CrossOrigin(value = "http://localhost:3000")
@@ -18,14 +20,14 @@ public class AuthController {
 
     private final AuthService authService;
 
-    private static Logger log = getLogger(AuthController.class);
+    private static final Logger log = getLogger(AuthController.class);
 
     public AuthController(AuthService authService) {
         this.authService = authService;
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@RequestBody LoginReq req) {
+    public ResponseEntity<Void> login(@NotBlank @RequestBody LoginReq req) {
 
         log.info("Login user: {} password: {}", req.getUsername(), req.getPassword());
 
@@ -38,10 +40,9 @@ public class AuthController {
 
 
     @PostMapping("/register")
-    public ResponseEntity<Void> register(@RequestBody RegisterReq req) {
+    public ResponseEntity<Void> register(@NotBlank @RequestBody RegisterReq req) {
 
         log.info("Register user: {} role: {}", req.getUsername(), req.getRole());
-
         Role role = req.getRole() == null ? Role.LIST_VIEW : req.getRole();
 
         if (authService.register(req, role)) {

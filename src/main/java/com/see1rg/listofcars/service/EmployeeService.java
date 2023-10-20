@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public interface EmployeeService {
 
-    Page<EmployeeDTO> findAllWithFilters(EmployeePage employeePage, EmployeeSearchCriteria employeeSearchCriteria);
-
+    Page<EmployeeDTO> findAllWithFilters(EmployeePage employeePage,
+                                         EmployeeSearchCriteria employeeSearchCriteria);
 
     EmployeeDTO getEmployeeForEdit(Integer employeeId);
 

@@ -72,11 +72,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             Department department = departmentRepository.findById(employee.getDepartmentId())
                     .isPresent() ? departmentRepository.findById(employee.getDepartmentId()).get() : null;
 
-            log.info("department {}", department);
-
             Employee mapperEmployee = employeeMapper.toEmployee(employee, department);
-
-            log.info("mapperEmployee {}", mapperEmployee);
 
             return employeeRepository.save(mapperEmployee);
     }

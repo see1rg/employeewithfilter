@@ -34,6 +34,7 @@ public class WebSecurityConfig {
                                         .permitAll()
                                         .mvcMatchers("/api/**")
                                         .authenticated()
+                                        .and()
                 )
                 .cors()
                 .and()

@@ -16,7 +16,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 @RestControllerAdvice
 public class CustomExceptionHandler {
 
-    Logger log = getLogger(CustomExceptionHandler.class);
+    private static final Logger log = getLogger(CustomExceptionHandler.class);
 
 
     @ExceptionHandler(UserNotFoundException.class)
@@ -44,6 +44,7 @@ public class CustomExceptionHandler {
 
     @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<String> handleConstraintViolationException(ConstraintViolationException e) {
+        log.error("Constraint violation: {}", e.getMessage());
         return ResponseEntity.badRequest().body("Constraint violation: " + e.getMessage());
     }
 }

@@ -1,8 +1,10 @@
 package com.see1rg.listofcars.model.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
@@ -20,6 +22,7 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonIgnore
     private Integer id;
 
     @Column(name = "full_name")
@@ -37,6 +40,7 @@ public class Employee {
     private BigDecimal salary;
 
     @Column(name = "birth_date")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
 
     @Column(name = "manager") //parent
@@ -44,11 +48,12 @@ public class Employee {
     private Integer managerId;
 
     @Column(name = "creation_date")
-    private Timestamp creationDate;
+    @JsonIgnore
+    private Timestamp dateOfLastModification;
 
     @JoinColumn(name = "dept_id", referencedColumnName = "id")
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @Cascade({CascadeType.PERSIST})
     private Department departmentId;
 
     @Lob
@@ -121,13 +126,10 @@ public class Employee {
         this.managerId = managerId;
     }
 
-    public Timestamp getCreationDate() {
-        return creationDate;
+    public Timestamp getDateOfLastModification() {
+        return dateOfLastModification;
     }
 
-    public void setCreationDate(Timestamp creationDate) {
-        this.creationDate = creationDate;
-    }
 
     public Department getDepartmentId() {
         return departmentId;
@@ -176,7 +178,7 @@ public class Employee {
                 ", salary=" + salary +
                 ", birthDate=" + birthDate +
                 ", managerId=" + managerId +
-                ", creationDate=" + creationDate +
+                ", dateOfLastModification=" + dateOfLastModification +
                 ", departmentId=" + departmentId +
                 ", image=" + Arrays.toString(image) +
                 ", data=" + Arrays.toString(data) +

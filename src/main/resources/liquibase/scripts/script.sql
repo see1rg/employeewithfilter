@@ -15,9 +15,9 @@ create table if not exists users (
 -- Таблица "Departments"
 create table if not exists departments (
                                            id serial primary key,
-                                           name varchar(55) not null,
+                                           name varchar(55),
                                            description text,
-                                           creation_date timestamp not null default current_timestamp
+                                           creation_date timestamp default current_timestamp
 );
 
 -- Таблица "Сотрудники"
@@ -29,7 +29,7 @@ create table if not exists employees (
                                          salary numeric(10, 2),
                                          birth_date timestamp,
                                          manager int, --parent
-                                         creation_date timestamp not null default current_timestamp,
+                                         creation_date timestamp default current_timestamp,
                                          dept_id int,
                                          image bytea,
                                          data bytea,

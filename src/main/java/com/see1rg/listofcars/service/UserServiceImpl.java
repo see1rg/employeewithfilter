@@ -36,6 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public RegisterReq update(RegisterReq user, Principal principal) {
         log.info("Update user: {}", principal);
         User optionalUser = userRepository.findUserByUsername(principal.getName());
@@ -54,6 +55,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public RegisterReq save(RegisterReq user) {
         log.info("Save user: {}", user);
         User newUser = new User();

@@ -1,7 +1,8 @@
 package com.see1rg.listofcars.model.entity.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.Date;
 
 public class EmployeeDTO {
@@ -10,9 +11,9 @@ public class EmployeeDTO {
     private String description;
     private Integer experience;
     private BigDecimal salary;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date birthDate;
     private Integer managerId;
-    private Timestamp creationDate;
     private Integer departmentId;
 
     public Integer getId() {
@@ -69,14 +70,6 @@ public class EmployeeDTO {
 
     public void setManagerId(Integer managerId) {
         this.managerId = managerId;
-    }
-
-    public Timestamp getCreationDate() {
-        return creationDate;
-    }
-
-    public void setCreationDate(Timestamp creationDate) {
-        this.creationDate = creationDate;
     }
 
     public Integer getDepartmentId() {

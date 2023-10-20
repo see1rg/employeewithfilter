@@ -13,6 +13,9 @@ public interface EmployeeService {
     Page<EmployeeDTO> findAllWithFilters(EmployeePage employeePage, EmployeeSearchCriteria employeeSearchCriteria);
 
 
-    public Employee addEmployee(Employee employee);
+    EmployeeDTO getEmployeeForEdit(Integer employeeId);
 
+    public void deleteEmployee(Integer employeeId);
+
+    Employee editEmployee(EmployeeDTO employee);
 }

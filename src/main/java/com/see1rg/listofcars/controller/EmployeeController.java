@@ -5,7 +5,6 @@ import com.see1rg.listofcars.model.EmployeeSearchCriteria;
 import com.see1rg.listofcars.model.entity.Employee;
 import com.see1rg.listofcars.model.entity.dto.EmployeeDTO;
 import com.see1rg.listofcars.service.EmployeeService;
-import com.see1rg.listofcars.service.EntityService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,15 +18,13 @@ import javax.validation.constraints.NotEmpty;
 public class EmployeeController {
 
     private final EmployeeService employeeService;
-    private final EntityService entityService;
 
-    public EmployeeController(EmployeeService employeeService, EntityService entityService) {
+    public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
-        this.entityService = entityService;
     }
 
 
-    @GetMapping("/data_list")
+    @GetMapping("/data_list/employee")
     @PreAuthorize("hasRole('ROLE_LIST_VIEW')")
     public ResponseEntity<Page<EmployeeDTO>> getEmployeeList(EmployeePage employeePage,
                                                              EmployeeSearchCriteria employeeSearchCriteria) {
@@ -36,25 +33,22 @@ public class EmployeeController {
                 HttpStatus.OK);
     }
 
-    @GetMapping("/get_data")
+    @GetMapping("/get_data/employee/{employeeId}")
     @PreAuthorize("hasRole('ROLE_ADD')")
-    public ResponseEntity<Employee> getEmployeeForEdit(@RequestParam Long id) {
-
-        return null;
+    public ResponseEntity<EmployeeDTO> getEmployeeForEdit(@PathVariable Integer employeeId) {
+        return ResponseEntity.status(HttpStatus.OK).body(employeeService.getEmployeeForEdit(employeeId));
     }
 
-    @PostMapping("/edit_data")
+    @PostMapping("/edit_data/employee")
     @PreAuthorize("hasRole('ROLE_EDIT')")
-    public ResponseEntity<String> editEmployee(@RequestBody Employee data) {
-
-        return null;
+    public ResponseEntity<Employee> editEmployee(@RequestBody EmployeeDTO employee) {
+        return ResponseEntity.status(HttpStatus.OK).body(employeeService.editEmployee(employee));
     }
 
-    @DeleteMapping("/delete_data")
+    @DeleteMapping("/delete_data/employee/{entityId}")
     @PreAuthorize("hasRole('ROLE_DELETE')")
-    public ResponseEntity<String> deleteEmployee(@NotEmpty @RequestParam String entityType, @NotEmpty @RequestParam Integer entityId) {
-
-        entityService.deleteEntity(entityType, entityId);
+    public ResponseEntity<String> deleteEmployee(@NotEmpty @PathVariable Integer entityId) {
+        employeeService.deleteEmployee(entityId);
         return ResponseEntity.ok("Entity deleted successfully");
     }
 }

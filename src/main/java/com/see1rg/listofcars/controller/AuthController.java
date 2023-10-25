@@ -7,15 +7,20 @@ import com.see1rg.listofcars.service.AuthService;
 import org.slf4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.constraints.NotBlank;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
 @RestController
-@RequestMapping("/auth")
-@CrossOrigin(origins = "http://localhost:8080")
+@RequestMapping("/api/auth")
+@CrossOrigin(origins = "*")
 public class AuthController {
 
     private final AuthService authService;
@@ -52,16 +57,12 @@ public class AuthController {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
 
-//    @PostMapping("/logout")
-//    public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response) {
-//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//        if (auth != null) {
-//            new SecurityContextLogoutHandler().logout(request, response, auth);
-//        }
-//
-//        // Дополнительная логика для завершения сеанса пользователя, если необходимо
-//
-//        // После успешного выхода, вы можете вернуть успешный статус.
-//        return ResponseEntity.ok().build();
-//    }
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(HttpServletRequest request) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null) {
+            request.getSession().invalidate();
+        }
+        return ResponseEntity.ok().build();
+    }
 }

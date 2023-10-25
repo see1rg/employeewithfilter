@@ -2,6 +2,14 @@
   <div style="margin: 0 auto; width: 80%">
     <Toast/>
     <Panel header="Employee List">
+      <br>
+      <button @click="logout" class="p-button p-button-secondary">Logout</button>
+      <br>
+    </Panel>
+  </div>
+  <div style="margin: 0 auto; width: 80%">
+    <Toast/>
+    <Panel header="Employee List">
       <Menubar :model="items"/>
       <br>
       <DataTable :value="employees" :paginator="true" :rows="10" selection-mode="single"
@@ -46,6 +54,7 @@
 <script>
 import EmployeeService from "../service/EmployeeService";
 import DepartmentService from "../service/DepartmentService";
+import LoginService from "../service/LoginService";
 
 export default {
   name: 'Employee',
@@ -113,16 +122,18 @@ export default {
   created() {
     this.employeeService = new EmployeeService();
     this.departmentService = new DepartmentService();
+    this.loginService = new LoginService();
   },
   mounted() {
     this.employeeService.getAll().then(response => {
       this.employees = response.data.content;
-      // console.log(this.employees);
     });
     this.departmentService.getAllDepartments().then(response => {
       this.departments = response.data;
-      // console.log(this.departments);
     })
+  },
+  logout() {
+    this.loginService.logout();
   },
   methods: {
     showSaveModal() {

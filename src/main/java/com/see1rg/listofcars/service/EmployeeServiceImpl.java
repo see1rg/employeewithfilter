@@ -23,9 +23,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeMapper employeeMapper;
     private static final Logger log = getLogger(EmployeeServiceImpl.class);
 
-    public EmployeeServiceImpl(EmployeeRepository employeeRepository, DepartmentRepository departmentRepository, EmployeeCriteriaRepository employeeCriteriaRepository, EmployeeMapper employeeMapper) {
+    public EmployeeServiceImpl(EmployeeRepository employeeRepository, EmployeeCriteriaRepository employeeCriteriaRepository, EmployeeMapper employeeMapper) {
         this.employeeRepository = employeeRepository;
-        this.departmentRepository = departmentRepository;
         this.employeeCriteriaRepository = employeeCriteriaRepository;
         this.employeeMapper = employeeMapper;
     }

@@ -9,7 +9,7 @@
         <Column field="id" header="ID"></Column>
         <Column field="fullName" header="fullName"></Column>
         <Column field="description" header="description"></Column>
-        <Column field="department" header="department"></Column>
+        <Column field="departmentId" header="department" ></Column>
         <Column field="salary" header="salary"></Column>
       </DataTable>
     </Panel>
@@ -117,11 +117,11 @@ export default {
   mounted() {
     this.employeeService.getAll().then(response => {
       this.employees = response.data.content;
-      console.log(this.employees);
+      // console.log(this.employees);
     });
     this.departmentService.getAllDepartments().then(response => {
-      this.departments = response.data.content;
-      console.log(this.departments);
+      this.departments = response.data;
+      // console.log(this.departments);
     })
   },
   methods: {
@@ -171,7 +171,7 @@ export default {
     },
     getAllDepartments() {
       this.departmentService.getAllDepartments().then(response => {
-        this.departments = response.data.content;
+        this.departments = response.data;
       });
     },
     closeModal() {

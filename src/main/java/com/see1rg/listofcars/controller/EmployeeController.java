@@ -25,7 +25,7 @@ public class EmployeeController {
 
 
     @GetMapping("/data_list/employee")
-//    @PreAuthorize("hasRole('ROLE_LIST_VIEW')")
+    @PreAuthorize("hasRole('ROLE_LIST_VIEW')")
     public ResponseEntity<Page<EmployeeDTO>> getEmployeeList(EmployeePage employeePage,
                                                              EmployeeSearchCriteria employeeSearchCriteria) {
 
@@ -34,13 +34,13 @@ public class EmployeeController {
     }
 
     @GetMapping("/get_data/employee/{employeeId}")
-//    @PreAuthorize("hasRole('ROLE_ADD')")
+    @PreAuthorize("hasRole('ROLE_ADD')")
     public ResponseEntity<EmployeeDTO> getEmployeeForEdit(@PathVariable Integer employeeId) {
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.getEmployeeForEdit(employeeId));
     }
 
     @PostMapping("/edit_data/employee")
-//    @PreAuthorize("hasRole('ROLE_EDIT')")
+    @PreAuthorize("hasRole('ROLE_EDIT')")
     public ResponseEntity<Employee> editEmployee(@RequestBody Employee employee) {
         employeeService.editEmployee(employee);
 
@@ -48,7 +48,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/delete_data/employee/{entityId}")
-//    @PreAuthorize("hasRole('ROLE_DELETE')")
+    @PreAuthorize("hasRole('ROLE_DELETE')")
     public ResponseEntity<Void> deleteEmployee(@NotEmpty @PathVariable Integer entityId) {
         Employee employee = employeeService.getEmployee(entityId);
         if (employee != null) {

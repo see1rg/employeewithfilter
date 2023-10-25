@@ -15,7 +15,11 @@ public interface EmployeeService {
 
     EmployeeDTO getEmployeeForEdit(Integer employeeId);
 
-    public void deleteEmployee(Integer employeeId);
+    void deleteEmployee(Integer employeeId);
 
-    Employee editEmployee(EmployeeDTO employee);
+    Employee editEmployee(Employee employee);
+
+    Employee getEmployee(Integer employeeId);
+
+    Employee getEmployeeByFullName(String fullName);
 }

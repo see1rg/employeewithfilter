@@ -15,9 +15,8 @@ import javax.validation.constraints.NotEmpty;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*")
+@CrossOrigin("http://localhost:8080")
 public class EmployeeController {
-
     private final EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
@@ -26,7 +25,7 @@ public class EmployeeController {
 
 
     @GetMapping("/data_list/employee")
-//    @PreAuthorize("hasRole('ROLE_LIST_VIEW')")
+    @PreAuthorize("hasRole('ROLE_LIST_VIEW')")
     public ResponseEntity<Page<EmployeeDTO>> getEmployeeList(EmployeePage employeePage,
                                                              EmployeeSearchCriteria employeeSearchCriteria) {
 
@@ -35,21 +34,28 @@ public class EmployeeController {
     }
 
     @GetMapping("/get_data/employee/{employeeId}")
-//    @PreAuthorize("hasRole('ROLE_ADD')")
+    @PreAuthorize("hasRole('ROLE_ADD')")
     public ResponseEntity<EmployeeDTO> getEmployeeForEdit(@PathVariable Integer employeeId) {
         return ResponseEntity.status(HttpStatus.OK).body(employeeService.getEmployeeForEdit(employeeId));
     }
 
     @PostMapping("/edit_data/employee")
-//    @PreAuthorize("hasRole('ROLE_EDIT')")
-    public ResponseEntity<Employee> editEmployee(@RequestBody EmployeeDTO employee) {
-        return ResponseEntity.status(HttpStatus.OK).body(employeeService.editEmployee(employee));
+    @PreAuthorize("hasRole('ROLE_EDIT')")
+    public ResponseEntity<Employee> editEmployee(@RequestBody Employee employee) {
+        employeeService.editEmployee(employee);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/delete_data/employee/{entityId}")
-//    @PreAuthorize("hasRole('ROLE_DELETE')")
-    public ResponseEntity<String> deleteEmployee(@NotEmpty @PathVariable Integer entityId) {
-        employeeService.deleteEmployee(entityId);
-        return ResponseEntity.ok("Entity deleted successfully");
+    @PreAuthorize("hasRole('ROLE_DELETE')")
+    public ResponseEntity<Void> deleteEmployee(@NotEmpty @PathVariable Integer entityId) {
+        Employee employee = employeeService.getEmployee(entityId);
+        if (employee != null) {
+            employeeService.deleteEmployee(entityId);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

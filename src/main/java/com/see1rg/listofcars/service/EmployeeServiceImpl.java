@@ -4,7 +4,6 @@ import com.see1rg.listofcars.exception.EmployeeNotFoundException;
 import com.see1rg.listofcars.mapper.EmployeeMapper;
 import com.see1rg.listofcars.model.EmployeePage;
 import com.see1rg.listofcars.model.EmployeeSearchCriteria;
-import com.see1rg.listofcars.model.entity.Department;
 import com.see1rg.listofcars.model.entity.Employee;
 import com.see1rg.listofcars.model.entity.dto.EmployeeDTO;
 import com.see1rg.listofcars.repository.DepartmentRepository;
@@ -20,7 +19,6 @@ import static org.slf4j.LoggerFactory.getLogger;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     private final EmployeeRepository employeeRepository;
-    private final DepartmentRepository departmentRepository;
     private final EmployeeCriteriaRepository employeeCriteriaRepository;
     private final EmployeeMapper employeeMapper;
     private static final Logger log = getLogger(EmployeeServiceImpl.class);
@@ -55,26 +53,34 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     @Transactional
     public void deleteEmployee(Integer employeeId) {
-
-        if (!employeeRepository.existsById(employeeId)) {
-            throw new EmployeeNotFoundException();
-        }
-
         log.info("Delete entity with id: {}", employeeId);
         employeeRepository.deleteById(employeeId);
     }
 
     @Override
     @Transactional
-    public Employee editEmployee(EmployeeDTO employee) {
-        log.info("editEmployee {}", employee);
+    public Employee editEmployee(Employee employee) {
 
-            Department department = departmentRepository.findById(employee.getDepartmentId())
-                    .isPresent() ? departmentRepository.findById(employee.getDepartmentId()).get() : null;
+        log.info("editEmployee with department id {}", employee.getDepartmentId());
 
-            Employee mapperEmployee = employeeMapper.toEmployee(employee, department);
+//        Department department = departmentRepository.findById(employeeDTO.getDepartmentId())
+//                .isPresent() ? departmentRepository.findById(employeeDTO.getDepartmentId()).get() : null;
 
-            return employeeRepository.save(mapperEmployee);
+//        Employee employee = employeeMapper.toEmployee(employeeDTO, department);
+
+        return employeeRepository.save(employee);
+    }
+
+    @Override
+    public Employee getEmployee(Integer employeeId) {
+        log.info("getEmployee {}", employeeId);
+        return employeeRepository.findById(employeeId).isPresent()
+                ? employeeRepository.findById(employeeId).get() : null;
+    }
+
+    @Override
+    public Employee getEmployeeByFullName(String fullName) {
+        return employeeRepository.findByFullName(fullName);
     }
 
 

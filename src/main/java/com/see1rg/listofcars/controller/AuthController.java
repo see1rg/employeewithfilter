@@ -13,9 +13,9 @@ import javax.validation.constraints.NotBlank;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-//@CrossOrigin(value = "http://localhost:3000")
 @RestController
 @RequestMapping("/auth")
+@CrossOrigin(origins = "http://localhost:8080")
 public class AuthController {
 
     private final AuthService authService;
@@ -51,4 +51,17 @@ public class AuthController {
 
         return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
     }
+
+//    @PostMapping("/logout")
+//    public ResponseEntity<Void> logout(HttpServletRequest request, HttpServletResponse response) {
+//        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+//        if (auth != null) {
+//            new SecurityContextLogoutHandler().logout(request, response, auth);
+//        }
+//
+//        // Дополнительная логика для завершения сеанса пользователя, если необходимо
+//
+//        // После успешного выхода, вы можете вернуть успешный статус.
+//        return ResponseEntity.ok().build();
+//    }
 }

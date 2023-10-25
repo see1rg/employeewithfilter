@@ -25,6 +25,7 @@ public class WebSecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         return http.csrf()
                 .disable()
                 .authorizeHttpRequests(
@@ -32,9 +33,14 @@ public class WebSecurityConfig {
                                 authorization
                                         .mvcMatchers(HttpMethod.GET, AUTH_WHITELIST)
                                         .permitAll()
-                                        .mvcMatchers("/api/**")
+                                        .mvcMatchers("/api/**,/auth/**")
                                         .authenticated()
                                         .and()
+                )
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/logout/success")
+                        .invalidateHttpSession(true)
+                        .permitAll()
                 )
                 .cors()
                 .and()

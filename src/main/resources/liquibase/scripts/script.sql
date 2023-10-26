@@ -9,7 +9,7 @@ create table if not exists users (
                        username varchar(50) UNIQUE,
                        email varchar(50) UNIQUE,
                        password varchar(255),
-                       role varchar(12)
+                       role varchar(15)
 );
 
 -- Таблица "Departments"

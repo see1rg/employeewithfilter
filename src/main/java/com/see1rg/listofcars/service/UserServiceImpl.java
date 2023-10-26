@@ -46,9 +46,7 @@ public class UserServiceImpl implements UserService {
         }
 
         User updateUser = userMapper.updateUserFromRegisterReq(user, optionalUser);
-        updateUser.setRole(optionalUser.getRole());
         updateUser.setId(optionalUser.getId());
-        updateUser.setEmail(optionalUser.getEmail());
         userRepository.save(updateUser);
 
         return user;

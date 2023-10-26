@@ -8,7 +8,12 @@ public class RegisterReq {
     private String username;
     private String password;
     private String fullName;
+    private String email;
     private Role role;
+
+    public RegisterReq() {
+
+    }
 
     public String getUsername() {
         return username;
@@ -34,6 +39,14 @@ public class RegisterReq {
         this.fullName = fullName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public Role getRole() {
         return role;
     }
@@ -47,11 +60,11 @@ public class RegisterReq {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         RegisterReq that = (RegisterReq) o;
-        return Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(fullName, that.fullName) && role == that.role;
+        return Objects.equals(username, that.username) && Objects.equals(password, that.password) && Objects.equals(fullName, that.fullName) && Objects.equals(email, that.email) && role == that.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(username, password, fullName, role);
+        return Objects.hash(username, password, fullName, email, role);
     }
 }

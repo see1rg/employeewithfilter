@@ -1,12 +1,12 @@
 <template>
-  <div style="margin: 0 auto; width: 80%">
-    <Toast/>
-    <Panel header="Employee List">
-      <br>
-      <button @click="logout" class="p-button p-button-secondary">Logout</button>
-      <br>
-    </Panel>
-  </div>
+<!--  <div style="margin: 0 auto; width: 80%">-->
+<!--    <Toast/>-->
+<!--    <Panel header="Employee List">-->
+<!--      <br>-->
+<!--      <button @click="logout" class="p-button p-button-secondary">Logout</button>-->
+<!--      <br>-->
+<!--    </Panel>-->
+<!--  </div>-->
   <div style="margin: 0 auto; width: 80%">
     <Toast/>
     <Panel header="Employee List">

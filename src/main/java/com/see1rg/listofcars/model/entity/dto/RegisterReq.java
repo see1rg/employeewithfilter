@@ -67,4 +67,15 @@ public class RegisterReq {
     public int hashCode() {
         return Objects.hash(username, password, fullName, email, role);
     }
+
+    @Override
+    public String toString() {
+        return "RegisterReq{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", fullName='" + fullName + '\'' +
+                ", email='" + email + '\'' +
+                ", role=" + role +
+                '}';
+    }
 }

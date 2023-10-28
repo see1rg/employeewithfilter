@@ -30,8 +30,14 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<Void> login(@NotBlank @RequestBody LoginReq req) {
+    public ResponseEntity<Void> login(@NotBlank @RequestBody LoginReq req, Authentication authentication) {
 
+        if (authentication != null) {
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            System.out.println("Authenticated user: " + authentication.getName());
+        } else {
+            System.out.println("Not authenticated user");
+        }
         log.info("Login user: {} password: {}", req.getUsername(), req.getPassword());
 
         if (authService.login(req.getUsername(), req.getPassword())) {

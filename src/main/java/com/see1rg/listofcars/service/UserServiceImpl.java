@@ -56,7 +56,6 @@ public class UserServiceImpl implements UserService {
     @Transactional
     public RegisterReq save(RegisterReq user) {
         log.info("Save user: {}", user);
-        System.out.println(user.toString());
 
         User newUser = new User();
         newUser = userMapper.updateUserFromRegisterReq(user, newUser);

@@ -54,12 +54,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public RegisterReq save(RegisterReq user) {
+    public void save(User user) {
         log.info("Save user: {}", user);
-
-        User newUser = new User();
-        newUser = userMapper.updateUserFromRegisterReq(user, newUser);
-        userRepository.save(newUser);
-        return user;
+        userRepository.save(user);
     }
 }

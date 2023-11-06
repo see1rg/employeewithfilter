@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
-import EmployeeForm from "@/components/EmployeeForm.vue"; // Замените на путь к вашему файлу
+import EmployeeForm from "@/components/EmployeeForm.vue";
 
 Vue.use(VueRouter);
 

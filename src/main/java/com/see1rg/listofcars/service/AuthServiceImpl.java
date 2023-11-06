@@ -1,6 +1,7 @@
 package com.see1rg.listofcars.service;
 
 
+import com.see1rg.listofcars.mapper.UserMapper;
 import com.see1rg.listofcars.model.entity.Role;
 import com.see1rg.listofcars.model.entity.User;
 import com.see1rg.listofcars.model.entity.dto.NewPasswordDto;
@@ -23,13 +24,16 @@ public class AuthServiceImpl implements AuthService {
     private final PasswordEncoder encoder;
     private final UserService userService;
     private final UserRepository userRepository;
+    private final UserMapper userMapper;
+
     private static final Logger log = getLogger(AuthServiceImpl.class);
 
-    public AuthServiceImpl(MyUserDetailsService manager, PasswordEncoder encoder, UserService userService, UserRepository userRepository) {
+    public AuthServiceImpl(MyUserDetailsService manager, PasswordEncoder encoder, UserService userService, UserRepository userRepository, UserMapper userMapper) {
         this.manager = manager;
         this.encoder = encoder;
         this.userService = userService;
         this.userRepository = userRepository;
+        this.userMapper = userMapper;
     }
 
     @Override
@@ -49,11 +53,9 @@ public class AuthServiceImpl implements AuthService {
             return false;
         }
 
-        RegisterReq newUser = new RegisterReq();
-        newUser.setUsername(registerReq.getUsername());
+        User newUser = new User();
+        newUser = userMapper.updateUserFromRegisterReq(registerReq, newUser);
         newUser.setPassword(encoder.encode(registerReq.getPassword()));
-        newUser.setFullName(registerReq.getFullName());
-        newUser.setRole(role);
         userService.save(newUser);
 
         return true;

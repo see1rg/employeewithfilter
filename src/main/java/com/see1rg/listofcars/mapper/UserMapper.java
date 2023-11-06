@@ -21,7 +21,7 @@ public interface UserMapper {
     @Mapping(target = "role", source = "registerReq.role")
     @Mapping(target = "username", source = "registerReq.username")
     @Mapping(target = "fullName", source = "registerReq.fullName")
-    @Mapping(target = "password",source = "registerReq.password")
+    @Mapping(target = "password",ignore = true)
     @Mapping(target = "email", source = "registerReq.email")
     User updateUserFromRegisterReq(RegisterReq registerReq, User user);
 

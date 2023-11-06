@@ -4,10 +4,7 @@ export default class LoginService {
     url="http://localhost:8081/api/auth";
 
     login(username, password) {
-        return axios.post(this.url + "/login", {
-            username: username,
-            password: password
-        });
+        return axios.post(this.url + "/login", {username, password});
     }
 
     logout() {

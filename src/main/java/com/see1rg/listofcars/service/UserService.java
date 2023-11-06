@@ -1,6 +1,7 @@
 package com.see1rg.listofcars.service;
 
 
+import com.see1rg.listofcars.model.entity.User;
 import com.see1rg.listofcars.model.entity.dto.RegisterReq;
 import com.see1rg.listofcars.model.entity.dto.UserDto;
 
@@ -13,5 +14,5 @@ public interface UserService {
 
     RegisterReq update(RegisterReq user, Principal principal);
 
-    RegisterReq save(RegisterReq newUser);
+    void save(User newUser);
 }

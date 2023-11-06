@@ -18,6 +18,7 @@
 <script>
 
 import LoginService from "@/service/LoginService";
+import {getAuthHeader} from "@/service/authHeader";
 export default {
   data() {
     return {
@@ -31,7 +32,7 @@ export default {
   methods: {
     async login() {
       try {
-        const response = await this.loginService.login(this.username, this.password);
+        const response = await this.loginService.login(this.username, this.password, getAuthHeader());
 
         if (response.status === 200) {
           this.$emit('authenticated', true);

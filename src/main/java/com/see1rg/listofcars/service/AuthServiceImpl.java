@@ -53,8 +53,7 @@ public class AuthServiceImpl implements AuthService {
             return false;
         }
 
-        User newUser = new User();
-        newUser = userMapper.updateUserFromRegisterReq(registerReq, newUser);
+        User newUser = userMapper.updateUserFromRegisterReq(registerReq);
         newUser.setPassword(encoder.encode(registerReq.getPassword()));
         userService.save(newUser);
 

@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
             throw new UserNotFoundException();
         }
 
-        User updateUser = userMapper.updateUserFromRegisterReq(user, optionalUser);
+        User updateUser = userMapper.updateUserFromRegisterReq(user);
         updateUser.setId(optionalUser.getId());
         userRepository.save(updateUser);
 
